@@ -12,6 +12,7 @@ import path from "node:path"
 import {
 	cleanup,
 	ensureGitAvailable,
+	getVersion,
 	interactivePromptDefault,
 	parseArgsRaw,
 	run,
@@ -27,9 +28,7 @@ const asciiLogo = `
  ░█████░██ ░██    ░██     ░███████   ░███████  ░██░█████   ░█████░██ 
                                                ░██               ░██ 
                                                ░██         ░███████ 
-
-Copy a GitHub repo to another repo interactively or via CLI
---------------------------------------------------------------------
+Version: ${getVersion()}
 `
 
 async function main() {
@@ -40,9 +39,8 @@ async function main() {
 	let preserve = preserveFlag
 
 	if (positional.length < 2) {
-		console.log(
-			`ℹ️  Running interactive mode — answer a few questions.\n ${asciiLogo}`,
-		)
+		console.log(asciiLogo)
+
 		try {
 			const answers = await interactivePromptDefault()
 			source = answers.source

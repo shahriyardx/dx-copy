@@ -1,6 +1,14 @@
 import fs from "node:fs"
 import enquirer from "enquirer"
 import { spawnSync } from "node:child_process"
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const pkgPath = path.resolve(__dirname, "../package.json")
+
+const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"))
 
 const { prompt } = enquirer as any
 
@@ -89,4 +97,8 @@ export const interactivePromptDefault = async () => {
 	])
 
 	return responses
+}
+
+export const getVersion = () => {
+	return pkg.version as string
 }
