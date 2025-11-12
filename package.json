@@ -20,7 +20,7 @@
 		"repository",
 		"migration"
 	],
-	"author": "Your Name",
+	"author": "Md Shahriyar Alam",
 	"license": "MIT",
 	"dependencies": {
 		"enquirer": "^2.4.1"
