@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * dx-copy CLI with interactive prompts using Enquirer
  *
@@ -16,7 +15,7 @@ import {
 	interactivePromptDefault,
 	parseArgsRaw,
 	run,
-} from "./utils.js"
+} from "./utils"
 
 const asciiLogo = `
        ░██                                                           
@@ -44,10 +43,15 @@ async function main() {
 		console.log(
 			`ℹ️  Running interactive mode — answer a few questions.\n ${asciiLogo}`,
 		)
-		const answers = await interactivePromptDefault()
-		source = answers.source
-		destination = answers.destination
-		preserve = answers.preserve
+		try {
+			const answers = await interactivePromptDefault()
+			source = answers.source
+			destination = answers.destination
+			preserve = answers.preserve
+		} catch {
+			console.log("❌ Cancelled")
+			return
+		}
 	} else {
 		source = positional[0]
 		destination = positional[1]

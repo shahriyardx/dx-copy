@@ -1,6 +1,7 @@
 import fs from "node:fs"
-import { spawnSync } from "node:child_process"
 import enquirer from "enquirer"
+import { spawnSync } from "node:child_process"
+
 const { prompt } = enquirer as any
 
 type ExecResult = { code: number; stdout: string; stderr: string }
@@ -48,7 +49,16 @@ export const cleanup = (dir: string, preserve: boolean) => {
 	}
 }
 
+function exit() {
+	prompt.cl
+}
+
 export const interactivePromptDefault = async () => {
+	process.stdin.on("keypress", (_, key) => {
+		if (key.name === "escape") {
+			exit()
+		}
+	})
 	const responses = await prompt([
 		{
 			type: "input",
@@ -77,5 +87,6 @@ export const interactivePromptDefault = async () => {
 			initial: false,
 		},
 	])
+
 	return responses
 }
