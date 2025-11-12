@@ -1,6 +1,6 @@
 {
 	"name": "dx-copy",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Copy a GitHub repo to another repo interactively or via CLI",
 	"type": "module",
 	"main": "dist/index.js",
